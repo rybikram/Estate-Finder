@@ -21,11 +21,11 @@ export const signin = async (req, res, next) => {
     const {email, password} = req.body  
      try {
          const validUser = await User.findOne({email})  
-         if(!validUser) return next(errorHandler(404, 'User no found'))
+         if(!validUser) return next(errorHandler(404, 'User not found'))
          const validPassword = bcryptjs.compareSync(password, validUser.password)
         if(!validPassword) return next(errorHandler(401, 'Wrong credentials'))
         const token = jwt.sign({id: validUser.id_}, process.env.JWT_SECRET)                         //for hashing we are using the second paramter
-         const {password: pass, ...rest} = validUser._doc               //after api call we do not want to show the password to the user
+         const {password: pass, ...rest} = validUser._doc               //after api call we do not want to show the password to the user, (if we also wan to remove any field from _doc then mention there )
         
         res.cookie('access token', token, {httpOnly: true})
         .status(200)
