@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { signInSuccess } from '../redux/user/userSlice'
 import { useNavigate } from 'react-router-dom'
 
+
 export default function OAuth() {
 
 const dispatch =  useDispatch()
@@ -25,11 +26,12 @@ const handleGoogleClick = async () =>{
         body: JSON.stringify({
           name: result.user.displayName, 
           email: result.user.email,  
-          photo: result.user.photoURL})
+          photo: result.user.photoURL
+        })
     })
     const data = await res.json()
     dispatch(signInSuccess(data))
-
+    // console.log(data)
     navigate('/')
 
    } catch (error) {
