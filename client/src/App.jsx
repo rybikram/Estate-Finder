@@ -29,3 +29,6 @@ function App() {
 }
 
 export default App
+
+
+//Line number 25 is called children using as outlet of PrivateRoute
