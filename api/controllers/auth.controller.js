@@ -45,9 +45,9 @@ export const google = async (req, res, next) =>{
            const token = jwt.sign({id: user._id}, process.env.JWT_SECRET)
            const {password: pass, ...rest} = user._doc
            res
-           .cookie('access_token', token, {httpOnly: true})                         //here httpOnly if for more secure 
+           .cookie('access_token', token, {httpOnly: true})                         //here httpOnly is for more secure 
            .status(200)
-           .json(rest)
+           .json(user)
       }else {
          const generatedPassword = Math.random.toString(36).slice(-8) + Math.random.toString(36).slice(-8)    //here is it 16 digit 8+8 random password
          const hashedPassword = bcryptjs.hashSync(generatedPassword, 10)
@@ -64,7 +64,7 @@ export const google = async (req, res, next) =>{
         const {password: pass, ...rest} = newUser._doc
         res.cookie('access_token', token, {httpOnly: true})
         .status(200)
-        .json(rest)
+        .json(newUser)
       }
     } catch (error) {
         // console.log(error)
