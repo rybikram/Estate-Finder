@@ -9,6 +9,8 @@ export const test = (req,res) =>{
 }
 
 export const updateUser = async (req, res, next) => {
+    // console.log(req.user.id)
+    // console.log(req.params.id)
     if(req.user.id != req.params.id) return next(errorHandler(401, "You can only update your own account"))
 
      try {
@@ -26,9 +28,9 @@ export const updateUser = async (req, res, next) => {
                  avatar : req.body.avatar
             }
         }, {new: true})  //here new will update the information as per the latest value
-           
-        const {password: pass, ...rest} = updatedUser._doc
-        res.json(200).json(rest)
+
+        const {password, ...rest} = updatedUser._doc
+        res.status(200).json(rest)
      } catch (error) {
         next(error)
      }

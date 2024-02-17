@@ -28,7 +28,7 @@ export const signin = async (req, res, next) => {
         const token = jwt.sign({id: validUser._id}, process.env.JWT_SECRET)                         //for hashing we are using the second paramter
         const {password: pass, ...rest} = validUser._doc               //after api call we do not want to show the password to the user, (if we also wan to remove any field from _doc then mention there )
         
-        res.cookie('access token', token, {httpOnly: true})
+        res.cookie('access_token', token, {httpOnly: true})
         .status(200)
         .json(rest)
     }  catch(error) {
