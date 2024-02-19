@@ -16,7 +16,7 @@ const handleChange = (e) =>{
         [e.target.id] : e.target.value
       })
  }
-// console.log(formData)
+console.log(formData)
 
 const handleSubmit = async (e) =>{
   e.preventDefault()
@@ -27,13 +27,13 @@ try {
   {
     method: 'POST',
     headers: {
-      'Content-type': 'application/json'
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify(formData)
   })
   //here we are converting response to the json
   const data = await res.json()
-  // console.log(data)
+  console.log(data)
   if(data.success === false){
     setLoading(false)
     setError(data.message)

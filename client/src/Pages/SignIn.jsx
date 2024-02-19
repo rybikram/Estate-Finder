@@ -30,7 +30,7 @@ dispatch(signInStart())
   {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-type': 'application/json'
     },
     body: JSON.stringify(formData)
   })
