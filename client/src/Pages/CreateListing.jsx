@@ -36,7 +36,7 @@ const handleImageSubmit = (e) => {
         setImageUploadError(false)
         setUplaoding(false)             //when all the image uploading is completed we set it to false
     }).catch((err)=>{
-         setImageUploadError('Image upload failed (2 mb max per image)')
+         setImageUploadError('Image upload failed (2 mb per image)')
          setUplaoding(false)
     })
      }else{
@@ -165,7 +165,7 @@ const handleRemoveImage = (index) =>{
 
                     <div className='flex gap-4'>
                         <input onChange={(e)=> setFiles(e.target.files)} className='p-3 border border-gray-300 rounded w-full'
-                        type='file' id='images' accept='image/*' multiple />
+                        type="file" id='images' accept='image/*' multiple />
                         
                         <button type="button" onClick={handleImageSubmit} disabled={uploading}
                         className='p-3 text-green-700 border border-green-600
