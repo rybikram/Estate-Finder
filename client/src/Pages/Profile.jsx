@@ -146,9 +146,7 @@ const handleSignOut = async () =>{
 const handleShowListings = async () =>{
     try {
       setShowListingsError(false)                 //it will clean the previous error
-      const res = await fetch(`/api/user/listings/${currentUser._id}`, {
-         method: 'GET'
-      })
+      const res = await fetch(`/api/user/listings/${currentUser._id}`)
 
       const data = await res.json()
       if(data.success === false){
@@ -296,7 +294,10 @@ return (
                      <div className="flex flex-col items-center">
                          <button onClick={()=> handleListingDelete(listing._id)} className="text-red-700 uppercase">Delete</button>
                          <p className="text-red-700 mt-4 text-sm">{oneListingError ? 'Error showing listing' : ''}</p>
+                        
+                         <Link to={`/update-listing/${listing._id}`}>
                          <button className="text-green-700 uppercase">Edit</button>
+                         </Link>
                      </div>
                   </div>
            )}
