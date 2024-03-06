@@ -23,6 +23,8 @@ export default function Search() {
  const [loading, setLoading] = useState(false)
  const [listings, setListings] = useState([])
 
+ const [showMore, setShowMore] = useState(false)
+
 //  console.log(listings)
 
 //This is for the take all the url, search box query strng to the side bar search box
@@ -58,9 +60,16 @@ useEffect(()=>{
 
      const fetchListings = async () =>{
         setLoading(true)
+        setShowMore(false)
         const searchQuery = urlParams.toString()
         const res = await fetch(`/api/listing/get?${searchQuery}`)
         const data = await res.json()
+ //For show more
+        if(data.length > 8){
+          setShowMore(true)
+        }else{
+          setShowMore(false)
+        }      
         setListings(data)
         // console.log(data)
         setLoading(false)
@@ -123,6 +132,24 @@ const handleSubmit = (e) =>{
     navigate(`/search?${searchQuery}`)
 }
 
+
+//FOR SHOW MORE BUTTON
+ 
+ const onShowMoreCLick = async () =>{
+     const numberOfListings = listings.length
+     const startIndex = numberOfListings
+     console.log(startIndex)
+     const urlParams = new URLSearchParams(location.search) 
+     urlParams.set('startIndex', startIndex)
+     const searchQuery = urlParams.toString()
+
+     const res = await fetch(`/api/listing/get?${searchQuery}`)
+     const data = await res.json()
+     if(data.length < 9){
+      setShowMore(false)
+     }
+     setListings([...listings, ...data])
+ }
 
 
   return (
@@ -242,9 +269,23 @@ const handleSubmit = (e) =>{
                     }
 
                     {
-                      !loading && listings && listings.map((listing)=> (
+                      !loading && 
+                      listings && 
+                      listings.map((listing)=> (
                       <ListingItem key={listing._id} listing={listing} />))
                     }
+                    
+                    {
+                      showMore && (
+                        <button
+                        onClick={onShowMoreCLick}
+                         className='text-green-700 hover:underline p-7 text-center w-full'
+                        >
+                          Show more
+                        </button>
+                      )
+                    }
+
               </div>
           </div>
     </div>

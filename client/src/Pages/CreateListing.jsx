@@ -23,7 +23,7 @@ const [formData, setFormData] = useState({
     parking: false,
     furnished: false,
 })
-console.log(formData)
+// console.log(formData)
 //This is for image upload in create listing
 const [imageUploadError, setImageUploadError] = useState(false)
 const [uploading, setUplaoding] = useState(false)
