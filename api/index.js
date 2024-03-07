@@ -34,7 +34,7 @@ app.use('/api/listing', listingRouter)
 app.use(express.static(path.join(__dirname, '/client/dist')))     //for deply
 
 app.get('*', (req, res) =>{           //for deply   //any address expect the above router will call this
-res.sendFIle(path.join(__dirname, 'client', 'dist', 'index.html'))
+res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'))
 })
 
 //middleware
