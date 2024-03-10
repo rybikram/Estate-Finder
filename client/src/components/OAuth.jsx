@@ -43,6 +43,6 @@ const handleGoogleClick = async () =>{
     //below taking the type=button hence it will not submit the form will work as a button
     <button onClick={handleGoogleClick} type="button" 
     className='bg-red-700 text-white p-3 rounded-lg uppercase hover:opacity-95'>
-    Continue wth google</button>   
+    Continue with google</button>   
   )
 }
